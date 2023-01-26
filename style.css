@@ -50,3 +50,19 @@ main{
     font-size: 1.2em;
     color: red;
 }
+
+@media (max-width: 426px){
+    main{
+        width: 80%;
+    }
+}
+@media (max-width: 321px){
+    main{
+        width: 90%;
+    }
+}
+@media (max-width: 281px){
+   .pergunta{
+    font-size: 0.9em;
+   }
+}

@@ -1,5 +1,3 @@
-const main = document.querySelector('main')
-
 const questoes = [
     {
         pergunta : "Qual a capital do Brasil",
@@ -29,12 +27,10 @@ const questoes = [
 ]
 
 const pegaPergunta = pergunta =>{
-    const h4 = document.createElement('h4')
-    h4.classList.add('pergunta')
-    h4.innerText = `${pergunta} ?`
-    main.appendChild(h4)
-
+    const item = $('<h4>').addClass('pergunta').text(`${pergunta} ?`)
+    $('main').append(item)
 }
+
 const pegaNumeroQuestao = opcoes =>{
     let numero
     questoes.forEach(questao =>{
@@ -44,13 +40,13 @@ const pegaNumeroQuestao = opcoes =>{
     })
     return numero
 }
+
 const pegaOpcoes = opcoes =>{
-    const secao = document.createElement('section')
-    secao.classList.add('opcao')
+    const secao = $('<section>').addClass('opcao')
     const numero = pegaNumeroQuestao(opcoes)
 
     opcoes.forEach(opcao =>{
-        secao.innerHTML += `
+        secao.append(`
         <label>
             <input type="radio" 
             value =${opcoes.indexOf(opcao)} 
@@ -58,10 +54,12 @@ const pegaOpcoes = opcoes =>{
             ${opcao}
         </label>
         <br>
-        `
+        `)
     })
-    main.appendChild(secao)
+
+    $('main').append(secao)
 }
+
 const criaQuestao = posicao =>{
     const pergunta = questoes[posicao].pergunta
     const opcoes = questoes[posicao].opcoes
@@ -76,7 +74,6 @@ mostraQuestoes = ()=>{
 }
 
 mostraQuestoes()
-
 
 const pegaRespostaUsuario = e =>{
     const input = e.target
@@ -100,7 +97,7 @@ const removeClasse = (elemento,classe) =>{
 }
 
 const desmarcaOpcao = input =>{
-    setTimeout((e)=>{
+    setTimeout(()=>{
         input.checked = false
     },2000)
 } 
@@ -131,7 +128,7 @@ const verificaResposta = e =>{
     }
 }
 
-main.addEventListener('click',verificaResposta)
+$('main').click(verificaResposta)
 
 
 

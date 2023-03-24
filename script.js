@@ -68,9 +68,7 @@ const criaQuestao = posicao =>{
 }
 
 mostraQuestoes = ()=>{
-    for(let i = 0 ; i < questoes.length; i++){
-        criaQuestao(i)
-    }
+    for(let i = 0 ; i < questoes.length; i++) criaQuestao(i)
 }
 
 mostraQuestoes()
@@ -90,33 +88,25 @@ const pegaRespostaUsuario = e =>{
     }
 }
 
-const removeClasse = (elemento,classe) =>{
-    setTimeout(()=>{
-        elemento.classList.remove(classe)
-    },2000)
+let numeroRespostas = 0;
+const bloquearOpcoes = nome =>{
+    const opcoes = document.querySelectorAll(`input[name=${nome}]`)
+    for(let opcao of opcoes) opcao.disabled = true
+    numeroRespostas++
 }
 
-const desmarcaOpcao = input =>{
-    setTimeout(()=>{
-        input.checked = false
-    },2000)
-} 
-
-const corrigeResposta = (e,posicao,resposta)=>{
+let respostasCertas = 0;
+const corrigeResposta = (e,posicao,resposta,numeroRespostas)=>{
+    bloquearOpcoes(e.target.name)
     const label = e.target.parentNode
     
     if(questoes[posicao].resposta === resposta){
         label.classList.add('certo')
-        removeClasse(label,'certo')
-        
+        respostasCertas++
     }
-    else{
-        label.classList.add('errado')
-        removeClasse(label,'errado')
-    }
-
-    const input = e.target
-    desmarcaOpcao(input)
+    else label.classList.add('errado')
+    
+    if(numeroRespostas == 4) mostraResultado(respostasCertas)
 }
 
 const verificaResposta = e =>{
@@ -124,8 +114,13 @@ const verificaResposta = e =>{
     if(infoResposta){
         const numeroQuestaoArray = infoResposta[0] - 1
         const respostaUsuario = infoResposta[1]
-        corrigeResposta(e,numeroQuestaoArray,respostaUsuario)
+        corrigeResposta(e,numeroQuestaoArray,respostaUsuario,numeroRespostas)
     }
+}
+
+const mostraResultado = acertos =>{
+    alert(`Você acertou ${acertos} questões!`)
+    document.location.reload()
 }
 
 $('main').click(verificaResposta)

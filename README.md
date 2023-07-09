@@ -1,4 +1,7 @@
-# quiz
+# Quiz
+### HTML, CSS e Javascript
+#### Um quiz com 5 perguntas sobre capitais de países
+#### Uso de checkboxes
+#### Correção instantânea
 
-- Projeto pra treinar o uso de checkboxes, que reagem quando são clicados, mudando o texto da label pra verde pra resposta certa ou vermelho pra errada
-
+<a href="https://www.youtube.com/watch?v=iicZOevi9G8">Veja um vídeo demonstrativo</a>
